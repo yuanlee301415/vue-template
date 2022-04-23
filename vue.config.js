@@ -2,18 +2,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
-const defaultSettings = require('./src/settings.js')
 
 console.log('ENV:', process.env.ENV)
 console.log('NODE_ENV:', process.env.NODE_ENV)
 console.log('VERSION:', process.env.VUE_APP_VERSION)
 console.log('Build time:', new Date().toLocaleString())
-
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
-
-const name = defaultSettings.title || 'vue Element Admin' // page title
 
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
@@ -37,7 +30,7 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
+    port,
     open: false,
     overlay: {
       warnings: false,
@@ -56,9 +49,6 @@ module.exports = {
     }
   },
   configureWebpack: {
-    // provide the app's title in webpack's name field, so that
-    // it can be accessed in index.html to inject the correct title.
-    name: name,
     resolve: {
       alias: {
         '@': resolve('src')
@@ -163,4 +153,8 @@ module.exports = {
         }
       )
   }
+}
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
 }
