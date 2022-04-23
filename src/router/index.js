@@ -2,15 +2,17 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout'
 
-const routes = [
+Vue.use(Router)
+
+export const routes = [
   { // Home
     path: '/',
-    name: 'Home',
     component: Layout,
     redirect: '/',
     children: [
       {
         path: '',
+        name: 'Home',
         meta: {
           title: 'Home'
         },
@@ -19,10 +21,6 @@ const routes = [
     ]
   }
 ]
-
-Vue.use(Router)
-
-export { routes }
 
 export default new Router({
   routes
